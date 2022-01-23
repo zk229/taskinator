@@ -52,7 +52,7 @@ var createTaskEl = function(taskDataObj) {
 
     tasksToDoEl.appendChild(listItemEl);
 
-    taskDataObj.if = taskIdCounter;
+    taskDataObj.id = taskIdCounter;
     tasks.push(taskDataObj);
 
     taskIdCounter++;
@@ -113,6 +113,15 @@ var taskButtonHandler = function(event) {
 var deleteTask = function(taskId) {
     var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
     taskSelected.remove();
+
+    var updatedTaskArr = [];
+
+    for(var i = 0; i < tasks.length; i++) {
+        if(tasks[i].id !== parseInt(taskId)) {
+            updatedTaskArr.push(tasks[i]);
+        }
+    }
+    tasks = updatedTaskArr;
 };
 
 // edit existing task
